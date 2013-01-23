@@ -6,6 +6,7 @@ Histogramy is a CUI program to analyze 1-dimensional data.
 It draw a histogram with specified data and it also can draw the fitting curve
 estimated by a Gaussian Mixture Model probability distribution.
 
+![Screenshot](https://raw.github.com/lambdalisue/Histogramy/master/static/screenshot.png)
 
 Requirements
 -----------------------------------------------------------------------------
