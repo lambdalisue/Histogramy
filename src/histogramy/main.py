@@ -12,7 +12,7 @@ from numpy import concatenate
 from demo import demo
 from loader import load
 from simulator import fit
-from modulator import modulate_base
+from modulator import modulate_base, to_float
 from options import parse_args
 
 
@@ -32,13 +32,14 @@ def analyze(opts):
     # modulate the data with base
     data = modulate_base(data, opts.base)
 
-    # convert Decimal to float
-
     # remove data with threshold
     if opts.min_threshold:
         data = data[data>opts.min_threshold]
     if opts.max_threshold:
         data = data[data<opts.max_threshold]
+
+    # convert to float
+    data = to_float(data)
 
     # fitting
     kwargs = dict(

@@ -23,5 +23,9 @@ def flatten(l):
 def modulate_base(value, base=ONE):
     if not isinstance(base, Decimal):
         base = Decimal(base)
-    return float(Decimal(value) / base)
+    return Decimal(value) / base
 modulate_base = vectorize(modulate_base)
+
+def to_float(value):
+    return float(value)
+to_float = vectorize(to_float)

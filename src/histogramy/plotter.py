@@ -12,6 +12,12 @@ from matplotlib import pyplot, mpl
 from utils import create_formula
 
 
+def get(value, default_value):
+    if value is None:
+        return default_value
+    return value
+
+
 def plot(data, model, criterions, opts):
     mpl.rcParams['text.color'] = opts.graph_textcolor
     mpl.rcParams['axes.facecolor'] = opts.graph_facecolor
@@ -33,13 +39,15 @@ def plot(data, model, criterions, opts):
         ax = fig.add_subplot(111)
     plot_histogram(ax, data, opts)
     if opts.histogram_legend:
-        ax.legend(loc=opts.histogram_legend)
+        ax.legend(loc=opts.histogram_legend, prop={'size':
+            opts.histogram_legend_size})
     # plot fitting curve
     if opts.draw_fitting:
         ax = ax.twinx()
         plot_fitting(ax, data, model, opts)
         if opts.fitting_legend:
-            ax.legend(loc=opts.fitting_legend)
+            ax.legend(loc=opts.fitting_legend, prop={'size':
+                opts.fitting_legend_size})
     # plot criterions
     if opts.draw_criterions:
         ax = fig.add_subplot(212)
@@ -54,7 +62,7 @@ def plot_histogram(axis, data, opts):
     axis.set_ylabel(opts.histogram_ylabel)
 
     # plot
-    axis.hist(data,
+    n, bins, patches = axis.hist(data,
         bins=opts.bins,
         histtype=opts.histogram_type,
         color=opts.histogram_color,
@@ -65,13 +73,13 @@ def plot_histogram(axis, data, opts):
 
     # limit x viewport
     xmin, xmax = axis.get_xlim()
-    xmin = opts.histogram_xmin or xmin
-    xmax = opts.histogram_xmax or xmax
+    xmin = get(opts.histogram_xmin, xmin)
+    xmax = get(opts.histogram_xmax, xmax)
     axis.set_xlim(xmin, xmax)
     # limit y viewport
-    ymin, ymax = axis.get_ylim()
-    ymin = opts.histogram_ymin or ymin
-    ymax = opts.histogram_ymax or ymax
+    ymin, ymax = min(n), (max(n) * 1.2)
+    ymin = get(opts.histogram_ymin, ymin)
+    ymax = get(opts.histogram_ymax, ymax)
     axis.set_ylim(ymin, ymax)
 
 
@@ -100,15 +108,13 @@ def plot_fitting(axis, data, model, opts):
                 alpha=opts.fitting_alpha_individual,
                 label=formula)
 
-    # limit x viewport
-    xmin, xmax = axis.get_xlim()
-    xmin = opts.histogram_xmin or xmin
-    xmax = opts.histogram_xmax or xmax
-    axis.set_xlim(xmin, xmax)
+    # remove yticks
+    axis.get_yaxis().set_visible(False)
+
     # limit y viewport
     ymin, ymax = axis.get_ylim()
-    ymin = opts.fitting_ymin or ymin
-    ymax = opts.fitting_ymax or ymax
+    ymin = get(opts.fitting_ymin, ymin)
+    ymax = get(opts.fitting_ymax, ymax)
     axis.set_ylim(ymin, ymax)
 
 

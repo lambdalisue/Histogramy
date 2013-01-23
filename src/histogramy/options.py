@@ -112,7 +112,7 @@ def parse_args(args):
         default='X', metavar='LABEL',
         help='The label of histogram X axis')
     parser_plot.add_argument('--histogram-ylabel',
-        default='Count', metavar='LABEL',
+        default='Frequency', metavar='LABEL',
         help='The label of histogram Y axis')
     parser_plot.add_argument('--histogram-xmin', type=float,
         metavar='MIN',
@@ -129,6 +129,8 @@ def parse_args(args):
     parser_plot.add_argument('--histogram-legend',
         choices=LEGEND_LOCATIONS, nargs='?', const='upper left',
         help='The location of the histogram legend')
+    parser_plot.add_argument('--histogram-legend-size', type=int, default=8,
+        help='The size of the histogram legend')
     # fitting
     parser_plot.add_argument('--no-fitting', dest='draw_fitting',
         default=True, action='store_false',
@@ -172,6 +174,8 @@ def parse_args(args):
     parser_plot.add_argument('--fitting-legend',
         choices=LEGEND_LOCATIONS, nargs='?', const='upper right',
         help='The location of the fitting curve legend')
+    parser_plot.add_argument('--fitting-legend-size', type=int, default=8,
+        help='The size of the fitting curve legend')
     # criterions
     parser_plot.add_argument('--criterions', dest='draw_criterions',
         default=False, action='store_true',
@@ -206,6 +210,5 @@ def parse_args(args):
         # SI Prefix -> Decimal
         ps = list(prefix.NEGATIVES) + list(prefix.POSITIVES)
         ps = dict(ps)
-        opts.base = ps.get(opts.base, ONE)
-
+        opts.base = ps.get(opts.base, None) or Decimal(opts.base)
     return opts
