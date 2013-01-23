@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
 
-version = "0.1.1"
+version = "0.1.2"
 
 def read(filename):
     import os.path
@@ -21,8 +21,8 @@ setup(
     keywords = "1-dimensional, analysis, histogram",
     author = "Alisue",
     author_email = "lambdalisue@hashnote.net",
-    url=r"https://github.com/lambdalisue/hisy",
-    download_url = r"https://github.com/lambdalisue/hisy/tarball/master",
+    url=r"https://github.com/lambdalisue/histogramy",
+    download_url = r"https://github.com/lambdalisue/histogramy/tarball/master",
     license = 'MIT',
     packages = find_packages('src'),
     package_dir = {'': 'src'},
