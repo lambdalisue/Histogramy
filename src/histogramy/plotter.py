@@ -111,6 +111,11 @@ def plot_fitting(axis, data, model, opts):
     # remove yticks
     axis.get_yaxis().set_visible(False)
 
+    # limit x viewport
+    xmin, xmax = axis.get_xlim()
+    xmin = get(opts.histogram_xmin, xmin)
+    xmax = get(opts.histogram_xmax, xmax)
+    axis.set_xlim(xmin, xmax)
     # limit y viewport
     ymin, ymax = axis.get_ylim()
     ymin = get(opts.fitting_ymin, ymin)

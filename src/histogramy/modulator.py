@@ -26,6 +26,7 @@ def modulate_base(value, base=ONE):
     return Decimal(value) / base
 modulate_base = vectorize(modulate_base)
 
+
 def to_float(value):
     return float(value)
 to_float = vectorize(to_float)
