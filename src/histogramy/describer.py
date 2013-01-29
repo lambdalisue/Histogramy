@@ -19,7 +19,7 @@ def fit(data, model, criterions, opts):
     
     for i in range(len(model.weights_)):
         formula = create_formula(data, model, i)
-        print formula
+        print formula.encode('utf-8')
     return data, model, criterions, opts
 
 
