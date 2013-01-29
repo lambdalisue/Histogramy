@@ -30,8 +30,8 @@ setup(
     zip_safe = True,
     install_requires=[
         'setuptools',
-        'numpy', 'matplotlib',
         'scikit-learn',
+        #'numpy', 'matplotlib',     # Use package manager (e.g. apt-get)  to install these
     ],
     entry_points={
         'console_scripts': [
